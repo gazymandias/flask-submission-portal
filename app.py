@@ -7,23 +7,12 @@ from main.main import main_bp
 from models.user import User
 from db import db, app
 from flask_login import LoginManager
-# app = Flask(__name__)
 
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
 
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-# db = SQLAlchemy(app)
-
-# class User(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)  # primary keys are required by SQLAlchemy
-#     email = db.Column(db.String(100), unique=True)
-#     password = db.Column(db.String(100))
-#     name = db.Column(db.String(1000))
-#
-#
 db.create_all()
 
 login_manager = LoginManager()

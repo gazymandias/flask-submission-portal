@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-  flask-testing:
-    container_name: flask-testing
-    image: flask-testing
+  flask-submission-portal:
+    container_name: flask-submission-portal
+    image: flask-submission-portal
     build: .
     ports:
       - "80:80"
