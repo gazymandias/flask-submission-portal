@@ -29,6 +29,11 @@ This is a replacement for an earlier process where data was taken from excel fil
 
 `localhost/`
 
+>  check db (optional)
+`docker exec -it db psql -U postgres`
+`\dt`
+`exit` OR `\q`
+
 > **Shutting down** - remove all volume data
 
 `docker-compose down --volumes`
