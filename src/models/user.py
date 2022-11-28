@@ -11,7 +11,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
 
-@event.listens_for(User.__table__, 'after_create')
-def create_users(*args, **kwargs):
-    db.session.add(User(email='gareth@cadman.com', password='1234', name='Gareth Cadman'))
-    db.session.commit()
+# @event.listens_for(User.__table__, 'after_create')
+# def create_users(*args, **kwargs):
+#     db.session.add(User(email='gareth@cadman.com', password='1234', name='Gareth Cadman'))
+#     db.session.commit()

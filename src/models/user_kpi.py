@@ -1,11 +1,12 @@
 from src import db
-from sqlalchemy import event
+from sqlalchemy import event, ForeignKey
 
 class UserKpi(db.Model):
     __tablename__ = 'user_kpi'
     # test = db.Column(db.String(100))
-    user_id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
-    kpi_id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
+    # id = db.Column(db.Integer,autoincrement=True,nullable=False,unique=True)
+    user_id = db.Column(db.Integer, ForeignKey("user.id"), primary_key=True) # primary keys are required by SQLAlchemy
+    kpi_id = db.Column(db.Integer, ForeignKey("kpi.id"), primary_key=True) # primary keys are required by SQLAlchemy
 
 # @event.listens_for(UserKpi.__table__, 'after_create')
 # def create_dummy_user_kpis(*args, **kwargs):

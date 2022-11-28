@@ -25,6 +25,11 @@
                                 Profile
                             </a>
                             {% endif %}
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('main_bp.submit') }}" class="navbar-item">
+                                Submit
+                            </a>
+                            {% endif %}
                             {% if not current_user.is_authenticated %}
                             <a href="{{ url_for('auth_bp.login') }}" class="navbar-item">
                                 Login
