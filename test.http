@@ -1,0 +1,46 @@
+
+### create a user (password is hashed for storage
+POST http://localhost:80/api/user HTTP/1.1
+content-type: application/json
+
+{
+    "name": "John Smith",
+    "email": "john@smith.com",
+    "password": "password"
+} 
+
+
+### get user details
+GET http://localhost:80/api/users/1 HTTP/1.1
+
+
+### create a kpi
+POST http://localhost:80/api/kpis HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Vacancy Rate",
+    "description": "Defined as number of open positions divided by the number of total positions"
+} 
+
+
+### get kpis
+GET http://localhost:80/api/kpis HTTP/1.1
+
+
+### link user with a kpi
+POST http://localhost:80/api/user_kpis HTTP/1.1
+content-type: application/json
+
+{
+    "user_id": 1,
+    "kpi_id": 1
+}
+
+
+### get kpis users can submit
+GET http://localhost:80/api/user_kpis HTTP/1.1
+
+
+### get submitted kpi data
+GET http://localhost:80/api/kpi_data HTTP/1.1

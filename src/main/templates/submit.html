@@ -5,18 +5,33 @@
 <div class="column is-4 is-offset-4">
     <h3 class="title">Submit Data</h3>
     <div class="box">
+        {% with errors = get_flashed_messages(category_filter=["error"]) %}
+        {% if errors %}
+        <div class="notification is-danger">
+            {{ errors[0] }}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {% with infos = get_flashed_messages(category_filter=["info"]) %}
+        {% if infos %}
+        <div class="notification is-success">
+            {{ infos[0] }}
+        </div>
+        {% endif %}
+        {% endwith %}
 
         <form method="POST" action="/submit">
 
             {{ submission_status }}
             <br>
-            {% for kpi in kpis %}
-            <input type="radio" id={{kpi}} name="indicator_id" value={{kpi}}>
-            <label for="{{ kpi }}">{{ kpi }}</label><br>
+            {% for kpi_id, kpi_name in kpis.items() %}
+            <input type="radio" id={{kpi_name}} name="kpi_id" value={{kpi_id}} required>
+            <label for="{{ kpi_id }}">{{ kpi_name }}</label><br>
             {% endfor %}
 
             <br>
-            <p class="fallbackLabel">What month are you submitting data for?</p>
+            <p class="fallbackLabel">What period are you submitting data for?</p>
             <div class="fallbackDatePicker">
                 <div>
                     <span>

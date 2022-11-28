@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash
 from src.models.user import User
 from src.models.kpi import Kpi
 from src.models.user_kpi import UserKpi
+from src.models.kpi_data import KpiData
 from src import db
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -51,12 +52,13 @@ def create_user():
 @api_bp.route('/api/kpis/<id>', methods=['GET'])
 def get_kpi(id):
     try:
-        item = User.query.get(id)
-        del item.__dict__['_sa_instance_state']
-        return jsonify(item.__dict__)
+        kpi = User.query.get(id)
+        del kpi.__dict__['_sa_instance_state']
+        return jsonify(kpi.__dict__)
     except SQLAlchemyError as e:
         error = str(e.__dict__['orig'])
         return error
+
 
 @api_bp.route('/api/kpis', methods=['GET'])
 def get_kpis():
@@ -136,6 +138,30 @@ def delete_user_kpi(id):
         db.session.query(UserKpi).filter_by(id=id).delete()
         db.session.commit()
         return "user kpi link deleted"
+    except SQLAlchemyError as e:
+        error = str(e.__dict__['orig'])
+        return error
+
+
+@api_bp.route('/api/kpi_data', methods=['GET'])
+def get_all_kpi_data():
+    try:
+        kpi_data = []
+        for kpi in db.session.query(KpiData).all():
+            del kpi.__dict__['_sa_instance_state']
+            kpi_data.append(kpi.__dict__)
+        return jsonify(kpi_data)
+    except SQLAlchemyError as e:
+        error = str(e.__dict__['orig'])
+        return error
+
+
+@api_bp.route('/api/kpi_data/<id>', methods=['GET'])
+def get_kpi_data(id):
+    try:
+        kpi_data = KpiData.query.get(id)
+        del kpi_data.__dict__['_sa_instance_state']
+        return jsonify(kpi_data.__dict__)
     except SQLAlchemyError as e:
         error = str(e.__dict__['orig'])
         return error
